@@ -4,7 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-from webdata.model import loadSession
+from webdata.model import loadSession, anime
 
 
 class WebdataPipeline(object):
@@ -17,7 +17,7 @@ class WebdataPipeline(object):
             title=item['title'],
             link=item['link'],
             process=item['process'],
-            cover=item['cover'],
+            cover=item['cover'][0],
             play_count=item['play_count'],
             source=item['source']
         )

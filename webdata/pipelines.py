@@ -42,5 +42,33 @@ class WebdataPipeline(object):
         return item
 
     def close_spider(self,spider):
+        try:
+            self.session.execute("update ignore anime aa"
+                             "  join ("
+                             "      select c.id,c.id,(convert(c.play_count,decimal(10,1))-m)/x t"
+                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x"
+                             "          from anime a"
+                             "          where source='bilibili') b,anime c"
+                             "      where c.source='bilibili') bb"
+                             "on aa.id=bb.id"
+                             "set aa.trend=bb.t")
+            self.session.commit()
+        except Exception as e:
+            print(e)
+            self.session.rollback()
+        try:
+            self.session.execute("update ignore anime aa"
+                             "  join ("
+                             "      select c.id,c.id,(convert(c.play_count,decimal(10,1))-m)/x t"
+                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x"
+                             "          from anime a"
+                             "          where source='tencent') b,anime c"
+                             "      where c.source='tencent') bb"
+                             "on aa.id=bb.id"
+                             "set aa.trend=bb.t")
+            self.session.commit()
+        except Exception as e:
+            print(e)
+            self.session.rollback()
         print("爬虫结束")
         self.session.close()

@@ -1,4 +1,4 @@
-from sqlalchemy import Column,String
+from sqlalchemy import Column,String,Float
 from . import Base
 
 class Anime(Base):
@@ -10,6 +10,7 @@ class Anime(Base):
     cover = Column(String(255), nullable=True)
     play_count = Column(String(20), nullable=True)
     source = Column(String(20), nullable=True)
+    trend = Column(Float)
 
     def __init__(self,id,title,link,process,cover,play_count,source):
         self.id=id
@@ -19,3 +20,4 @@ class Anime(Base):
         self.cover=cover
         self.play_count=play_count
         self.source=source
+        self.trend=0

@@ -43,30 +43,32 @@ class WebdataPipeline(object):
 
     def close_spider(self,spider):
         try:
-            self.session.execute("update ignore anime aa"
+            self.session.execute("update ignore anime aa "
                              "  join ("
-                             "      select c.id,c.id,(convert(c.play_count,decimal(10,1))-m)/x t"
-                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x"
+                             "      select c.id,(convert(c.play_count,decimal(10,1))-m)/x t "
+                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x "
                              "          from anime a"
-                             "          where source='bilibili') b,anime c"
-                             "      where c.source='bilibili') bb"
-                             "on aa.id=bb.id"
+                             "          where source='bilibili') b,anime c "
+                             "      where c.source='bilibili') bb "
+                             "on aa.id=bb.id "
                              "set aa.trend=bb.t")
             self.session.commit()
+            print('成功更新bilibili热度')
         except Exception as e:
             print(e)
             self.session.rollback()
         try:
-            self.session.execute("update ignore anime aa"
+            self.session.execute("update ignore anime aa "
                              "  join ("
-                             "      select c.id,c.id,(convert(c.play_count,decimal(10,1))-m)/x t"
-                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x"
+                             "      select c.id,(convert(c.play_count,decimal(10,1))-m)/x t "
+                             "      from(select min(convert(a.play_count,decimal(10,1))) m,max(convert(a.play_count,decimal(10,1)))-min(convert(a.play_count,decimal(10,1))) x "
                              "          from anime a"
-                             "          where source='tencent') b,anime c"
-                             "      where c.source='tencent') bb"
-                             "on aa.id=bb.id"
+                             "          where source='tencent') b,anime c "
+                             "      where c.source='tencent') bb "
+                             "on aa.id=bb.id "
                              "set aa.trend=bb.t")
             self.session.commit()
+            print('成功更新tencent热度')
         except Exception as e:
             print(e)
             self.session.rollback()

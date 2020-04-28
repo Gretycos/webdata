@@ -11,14 +11,14 @@ process = CrawlerProcess(get_project_settings())
 # 获取 spiderloader 对象，以进一步获取项目下所有爬虫名称
 spider_loader = SpiderLoader(get_project_settings())
 
-# for spidername in spider_loader.list():
-#     process.crawl(spidername)
+for spidername in spider_loader.list():
+    process.crawl(spidername)
 
 # process.crawl('Bilibili_Movie')
 # process.crawl('Tencent_Movie')
 
-process.crawl('Bilibili_Anime')
-process.crawl('Tencent_Anime')
+# process.crawl('Bilibili_Anime')
+# process.crawl('Tencent_Anime')
 
 # 执行
 process.start()

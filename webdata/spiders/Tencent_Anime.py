@@ -8,11 +8,16 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from webdata.items import WebdataItem
+from webdata.items import AnimeItem
 
 
 class TencentSpider(scrapy.Spider):
-    name = 'Tencent'
+    name = 'Tencent_Anime'
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'webdata.pipelines.AnimePipeline': 400
+        }
+    }
     allowed_domains = ['v.qq.com']
     start_urls = ['https://v.qq.com/channel/cartoon?listpage=1&channel=cartoon&sort=18&_all=1']
     driver = None
@@ -35,7 +40,7 @@ class TencentSpider(scrapy.Spider):
             div = self.driver.find_elements_by_xpath('/html/body/div[5]/div/div[2]/div')
             # print(len(div))
             for list_item in div:
-                anime = WebdataItem()
+                anime = AnimeItem()
                 a = list_item.find_element_by_xpath('./a')
                 anime['link'] = a.get_attribute('href')
                 anime['title'] = a.get_attribute('title')

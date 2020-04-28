@@ -66,7 +66,9 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'webdata.pipelines.WebdataPipeline': 300,
+   'webdata.pipelines.AnimePipeline':400,
+   'webdata.pipelines.MoviePipeline':500
+   # 'webdata.pipelines.WebdataPipeline': 300,
    # 'scrapy.pipelines.images.ImagesPipeline': 301
 }
 # IMAGES_URLS_FIELD = 'cover'

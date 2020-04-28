@@ -11,13 +11,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
-from webdata.items import WebdataItem
+from webdata.items import AnimeItem
 
 ID = ''
 PWD = ''
 
 class BilibiliSpider(scrapy.Spider):
-    name = 'Bilibili' # 爬虫的唯一标识符
+    name = 'Bilibili_Anime' # 爬虫的唯一标识符
+    custom_settings = {
+        'ITEM_PIPELINES':{
+            'webdata.pipelines.AnimePipeline':400
+        }
+    }
     allowed_domains = ['www.bilibili.com','api.bilibili.com'] # 设置不过滤的域名
     start_urls = ['https://www.bilibili.com/anime/index/#season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&order=1&st=1&sort=0&page=1']
     # loginManager = BiliLogin.BilibiliLogin(url=None,username=None,password=None) # 登录器
@@ -60,7 +65,7 @@ class BilibiliSpider(scrapy.Spider):
             ul=self.driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[1]/ul[2]')
             records = ul.find_elements_by_tag_name('li')
             for li in records:
-                anime = WebdataItem()
+                anime = AnimeItem()
                 try:
                     a = li.find_elements_by_xpath('.//a') # a节点
                     p = li.find_element_by_xpath('.//p')

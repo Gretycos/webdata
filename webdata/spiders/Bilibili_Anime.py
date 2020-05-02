@@ -23,7 +23,7 @@ class BilibiliSpider(scrapy.Spider):
             'webdata.pipelines.AnimePipeline':400
         }
     }
-    allowed_domains = ['www.bilibili.com','api.bilibili.com'] # 设置不过滤的域名
+    allowed_domains = ['www.bilibili.com'] # 设置不过滤的域名
     start_urls = ['https://www.bilibili.com/anime/index/#season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&order=1&st=1&sort=0&page=1']
     # loginManager = BiliLogin.BilibiliLogin(url=None,username=None,password=None) # 登录器
     driver = None

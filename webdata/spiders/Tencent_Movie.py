@@ -12,7 +12,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdata.items import MovieItem
 
 
-class TencentSpider(scrapy.Spider):
+class Tencent_MovieSpider(scrapy.Spider):
     name = 'Tencent_Movie'
     custom_settings = {
         'ITEM_PIPELINES': {

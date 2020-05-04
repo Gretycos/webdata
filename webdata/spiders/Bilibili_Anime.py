@@ -16,32 +16,17 @@ from webdata.items import AnimeItem
 ID = ''
 PWD = ''
 
-class BilibiliSpider(scrapy.Spider):
+class Bilibili_AnimeSpider(scrapy.Spider):
     name = 'Bilibili_Anime' # 爬虫的唯一标识符
     custom_settings = {
-        'ITEM_PIPELINES':{
+        'ITEM_PIPELINES':{ # 指定pipeline
             'webdata.pipelines.AnimePipeline':400
         }
     }
     allowed_domains = ['www.bilibili.com'] # 设置不过滤的域名
     start_urls = ['https://www.bilibili.com/anime/index/#season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&order=1&st=1&sort=0&page=1']
-    # loginManager = BiliLogin.BilibiliLogin(url=None,username=None,password=None) # 登录器
     driver = None
     page = 150 # 爬取页数
-
-    # def parse(self, response):
-    #     self.loginManager = BiliLogin.BilibiliLogin(url=response.url, username=ID, password=PWD)
-    #     if not self.loginManager.biliLogin():
-    #         pass
-    #     self.driver.find_element_by_xpath('//*[@id="primaryChannelMenu"]/span[2]/div/a').click()
-    #     time.sleep(1)
-    #     self.driver.find_element_by_xpath('//*[@id="app"]/div[4]/div[1]/div[1]/div[2]/a[3]').click()
-    #     time.sleep(1)
-    #     for i in range(1, self.page):
-    #         real_url = 'https://api.bilibili.com/pgc/season/index/result?st=1&order=2&season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&sort=0&page={}&season_type=1&pagesize=20&type=1'.format(
-    #             i)
-    #         yield scrapy.Request(url=real_url, callback=self.myParse)
-    #         time.sleep(5)
 
     def parse(self, response):
         """
@@ -58,8 +43,6 @@ class BilibiliSpider(scrapy.Spider):
         self.driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[1]/ul[1]/li[4]/span').click()
         time.sleep(5)
         for i in range(1,self.page+1):
-            # real_url = 'https://api.bilibili.com/pgc/season/index/result?st=1&order=2&season_version=-1&area=-1&is_finish=-1&copyright=-1&season_status=-1&season_month=-1&year=-1&style_id=-1&sort=0&page={}&season_type=1&pagesize=20&type=1'.format(i)
-            # yield scrapy.Request(url=real_url,callback=self.myParse)
             print("正在爬取第{}页...".format(i))
             self.scroll() # 滚动加载
             ul=self.driver.find_element_by_xpath('//*[@id="app"]/div[2]/div[1]/ul[2]')

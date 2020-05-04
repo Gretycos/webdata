@@ -37,9 +37,6 @@ class AnimePipeline(object):
         except Exception as e:
             print(e)
             self.session.rollback()
-
-
-        # print(item)
         return item
 
     def close_spider(self,spider):
@@ -105,7 +102,6 @@ class MoviePipeline(object):
         except Exception as e:
             print(e)
             self.session.rollback()
-        # print(item)
         return item
 
     def close_spider(self,spider):

@@ -2,9 +2,6 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.spiderloader import SpiderLoader
 from scrapy.utils.project import get_project_settings
 
-# from scrapy import cmdline
-# cmdline.execute("scrapy crawl Bilibili".split())
-
 # 根据项目配置获取 CrawlerProcess 实例
 process = CrawlerProcess(get_project_settings())
 
@@ -13,12 +10,6 @@ spider_loader = SpiderLoader(get_project_settings())
 
 for spidername in spider_loader.list():
     process.crawl(spidername)
-
-# process.crawl('Bilibili_Movie')
-# process.crawl('Tencent_Movie')
-
-# process.crawl('Bilibili_Anime')
-# process.crawl('Tencent_Anime')
 
 # 执行
 process.start()

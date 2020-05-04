@@ -68,7 +68,6 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
    'webdata.pipelines.AnimePipeline':400,
    'webdata.pipelines.MoviePipeline':500
-   # 'webdata.pipelines.WebdataPipeline': 300,
    # 'scrapy.pipelines.images.ImagesPipeline': 301
 }
 # IMAGES_URLS_FIELD = 'cover'

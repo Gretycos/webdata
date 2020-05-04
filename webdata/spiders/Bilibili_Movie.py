@@ -16,7 +16,7 @@ from webdata.items import MovieItem
 ID = ''
 PWD = ''
 
-class BilibiliSpider(scrapy.Spider):
+class Bilibili_MovieSpider(scrapy.Spider):
     name = 'Bilibili_Movie' # 爬虫的唯一标识符
     custom_settings = {
         'ITEM_PIPELINES': {
@@ -46,7 +46,7 @@ class BilibiliSpider(scrapy.Spider):
     def parse(self, response):
         """
         处理爬虫请求：
-            使用selenium模拟浏览器点击、翻页，从结构中抽取出信息
+            从api中抽取信息
         :param response:
         :return anime:
         """

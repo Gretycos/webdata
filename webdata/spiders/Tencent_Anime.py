@@ -11,7 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdata.items import AnimeItem
 
 
-class TencentSpider(scrapy.Spider):
+class Tencent_AnimeSpider(scrapy.Spider):
     name = 'Tencent_Anime'
     custom_settings = {
         'ITEM_PIPELINES': {

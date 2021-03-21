@@ -4,11 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-HOST = '39.105.43.226'
+HOST = '127.0.0.1'
 PORT = '3306'
 DATABASE = 'webdata'
-USERNAME = 'abc'
-PASSWORD = 'mysqlpsw'
+USERNAME = 'yourusername'
+PASSWORD = 'yourpassword'
 # 创建对象的基类:
 Base = declarative_base()
 
